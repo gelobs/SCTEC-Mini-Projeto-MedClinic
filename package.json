@@ -1,0 +1,28 @@
+{
+  "name": "medclinic-api",
+  "version": "1.0.0",
+  "description": "MedClinic API - Etapa 1: base de autenticação e autorização (RBAC) com Node.js, TypeScript, Express e TypeORM/PostgreSQL.",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
+  "keywords": [
+    "medclinic",
+    "api",
+    "express",
+    "typescript"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.22.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.25",
+    "@types/node": "^20.19.43",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.3"
+  }
+}
