@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import express, { Application } from 'express';
 import * as dotenv from 'dotenv';
 import { AppDataSource } from './database/data-source';
+import routes from './routes';
 
 dotenv.config();
 
@@ -16,6 +17,8 @@ app.get('/', (_req, res) => {
     message: 'MedClinic API - Etapa 1: Autenticação e Autorização',
   });
 });
+
+app.use(routes);
 
 AppDataSource.initialize()
   .then(() => {
