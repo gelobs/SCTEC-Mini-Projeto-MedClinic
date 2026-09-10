@@ -3,6 +3,7 @@ import express, { Application } from 'express';
 import * as dotenv from 'dotenv';
 import { AppDataSource } from './database/data-source';
 import routes from './routes';
+import { errorMiddleware } from './middlewares/errorMiddleware';
 
 dotenv.config();
 
@@ -19,6 +20,9 @@ app.get('/', (_req, res) => {
 });
 
 app.use(routes);
+
+// Middleware de erros deve ser o último a ser registrado (RF12).
+app.use(errorMiddleware);
 
 AppDataSource.initialize()
   .then(() => {
