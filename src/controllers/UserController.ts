@@ -4,8 +4,8 @@ import { asyncHandler } from '../utils/asyncHandler';
 import { AppError } from '../utils/AppError';
 
 /**
- * Controller com os endpoints de verificação de autenticação exigidos
- * pelo RF10.
+ * Controller com os endpoints de verificação de autenticação/autorização
+ * exigidos pelo RF10: GET /users/me e GET /admin/ping.
  */
 export class UserController {
   private readonly userService = new UserService();
@@ -16,6 +16,13 @@ export class UserController {
     }
     const profile = await this.userService.getProfile(req.user.sub);
     res.status(200).json({ status: 'success', data: profile });
+  });
+
+  adminPing = asyncHandler(async (req: Request, res: Response) => {
+    res.status(200).json({
+      status: 'success',
+      message: 'Acesso concedido: endpoint restrito ao perfil Administrador.',
+    });
   });
 }
 
