@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { TokenExpiredError } from 'jsonwebtoken';
 import { verifyToken } from '../utils/jwt';
 import { AppError } from '../utils/AppError';
 
@@ -24,6 +25,11 @@ export function authMiddleware(req: Request, _res: Response, next: NextFunction)
     req.user = verifyToken(token);
     next();
   } catch (error) {
-    throw new AppError('Token inválido ou expirado', 401);
+    // Diferencia token expirado de token inválido para uma mensagem mais clara
+    // ao cliente, sem revelar detalhes internos de assinatura/estrutura do JWT.
+    if (error instanceof TokenExpiredError) {
+      throw new AppError('Token expirado. Faça login novamente.', 401);
+    }
+    throw new AppError('Token inválido', 401);
   }
 }
