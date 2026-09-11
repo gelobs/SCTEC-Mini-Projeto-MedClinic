@@ -7,6 +7,7 @@
     "dev": "ts-node-dev --respawn --transpile-only -r reflect-metadata src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
+    "seed": "ts-node -r reflect-metadata src/database/seed.ts",
     "typeorm": "ts-node -r reflect-metadata ./node_modules/typeorm/cli.js -d src/database/data-source.ts",
     "migration:generate": "npm run typeorm -- migration:generate",
     "migration:run": "npm run typeorm -- migration:run",

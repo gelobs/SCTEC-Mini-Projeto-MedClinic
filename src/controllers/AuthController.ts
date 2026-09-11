@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { AuthService } from '../services/AuthService';
 import { asyncHandler } from '../utils/asyncHandler';
+import { sendSuccess } from '../utils/httpResponse';
 
 /**
  * Controller responsável pelos endpoints de autenticação:
@@ -11,12 +12,12 @@ export class AuthController {
 
   register = asyncHandler(async (req: Request, res: Response) => {
     const user = await this.authService.register(req.body);
-    res.status(201).json({ status: 'success', data: user });
+    sendSuccess(res, 201, user);
   });
 
   login = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.authService.login(req.body);
-    res.status(200).json({ status: 'success', data: result });
+    sendSuccess(res, 200, result);
   });
 }
 
